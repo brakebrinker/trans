@@ -67,7 +67,7 @@ input:invalid:not(:placeholder-shown){
 .logo{
 	display:block;
 	height:55px;
-	background: url(../img/logo.svg) no-repeat center left;
+	background: url(../img/Logo.svg) no-repeat center left;
 	background-size:100% auto;
 }
 .breadcrumbs{
@@ -80,6 +80,14 @@ input:invalid:not(:placeholder-shown){
 	text-decoration: underline;
 }
 
+header nav ul {
+	margin: 0;
+	padding: 0;
+}
+header nav li {
+    list-style: none;
+    display: inline-block;
+}
 header nav a{
 	display:inline-block;
 	text-transform: uppercase;
