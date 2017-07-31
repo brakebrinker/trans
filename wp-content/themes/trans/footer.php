@@ -1,7 +1,7 @@
         <footer>
             <div class="container">
                 <div class="row">
-                    <?php if (!dynamic_sidebar("footer-widget-area") ) : ?>
+                    <?php if (!dynamic_sidebar("footer-widget-area")) : ?>
                     <?php endif; ?>
                 </div>
             </div>

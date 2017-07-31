@@ -205,4 +205,7 @@ add_action('wp_enqueue_scripts', 'enqueue_scripts');
 if (function_exists('add_theme_support')) {
     add_theme_support('menus');
 }
+
+/*Миниатюры в записях*/
+add_theme_support( 'post-thumbnails' );
 ?>
