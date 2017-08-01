@@ -51,9 +51,12 @@ input:invalid:not(:placeholder-shown){
 	overflow:hidden;
 }
 .pic img{
-	width:100%;
+/*	width:100%;
 	height:auto;
-	min-height:100%;
+	min-height:100%;*/
+	width: auto;
+	height: 100%;
+	/*min-height: 100%;*/
 }
 .ramka{
 	border:2px solid #fff;
@@ -361,7 +364,8 @@ form sup{
 	font-size: 21px;
 	color:#434343;
 }
-.pagination1>*{
+.pagination1>*,
+.pagination1 .nav-links>*{
 	display: inline-block;
 	padding: 6px;
 	border-radius: 6px;
@@ -371,13 +375,21 @@ form sup{
 	background-color: #f47b20;
 	color:#fff;
 }
+.screen-reader-text {
+	display: none;
+}
 /*СТРАНИЦА О НОВОСТИ*/
 .post-loop{
 	margin-bottom: 20px;
 }
+.post-loop .ramka {
+	overflow: hidden;
+}
 .post-loop img{
-	width: 100%;
-	height: 230px;
+/* 	width: 100%;
+height: 230px; */
+	width: auto;
+    height: 230px;
 }
 .post-loop .h7{
 	margin: 10px 0;

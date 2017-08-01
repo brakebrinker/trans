@@ -3,14 +3,23 @@
 <?php 
 $sliderPosts = get_field('выбор_слайдов', get_queried_object_id());
 
-$countSlide = 0;
+$productPosts = get_field('выбор_продуктов', get_queried_object_id());
+
+$partners = get_field('партнеры', get_queried_object_id());
+
+$args = array(
+    'posts_per_page' => 4,
+    'cat'            => 5,
+    'order'          => 'DESC'
+);
+
+$newsPosts = get_posts($args);
 ?>
 <main>
 	<div class="container">
 		<div id="slider" class="carousel slide" data-ride="carousel">
 			<div class="carousel-inner">
-				<?php foreach($sliderPosts as $post) { setup_postdata($post); 
-					$countSlide ++; ?>
+				<?php foreach($sliderPosts as $post) { setup_postdata($post); ?>
 					<div class="item">
 						<img src="<?php echo get_field('изображение_слайда', $post->ID); ?>" alt="">
 						<div class="carousel-caption">
@@ -27,31 +36,16 @@ $countSlide = 0;
 			<span class="fa-angle-right"></span>
 		  </a>
 		</div> 
-		<!-- <div class="row">
+		<div class="row">
+			<?php foreach($productPosts as $post) { setup_postdata($post); ?>
 			<div class="col-md-4 col-sm-6 actual">
-				<div class="pic">
-					<img src="img/foto1.jpg" alt="">
+				<div class="pic ramka"><?php echo get_the_post_thumbnail($post->ID, array(360,230), array('alt' => get_the_title($post->ID))); ?>
 				</div>
-				<h4>Автоматизация</h4>
-				<p>Полный спектр услуг по проектированию и монтажу в области автоматизации производственных процессов</p>
-				<a href="#" class="details">Подробнее &#187;</a>
+				<h4><?php the_title(); ?></h4>
+				<?php the_excerpt(); ?>
+				<a href="<?php the_permalink(); ?>" class="details">Подробнее &#187;</a>
 			</div>
-			<div class="col-md-4 col-sm-6 actual">
-				<div class="pic ramka">
-					<img src="img/foto2.jpg" alt="">
-				</div>
-				<h4>Энергетика</h4>
-				<p>Проектирование и монтаж энергетического оборудования промышленных предприятий</p>
-				<a href="#" class="details">Подробнее &#187;</a>
-			</div>
-			<div class="col-md-4 col-sm-6 actual">
-				<div class="pic ramka">
-					<img src="img/foto3.jpg" alt="">
-				</div>
-				<h4>IT - решения</h4>
-				<p>Проектирование и монтаж оборудования в сфере информатизации</p>
-				<a href="#" class="details">Подробнее &#187;</a>
-			</div>
+			<?php } ?>
 		</div>
 		<hr>
 
@@ -111,49 +105,29 @@ $countSlide = 0;
 					</div>
 				</div>
 				<div class="row container-fluid info-block">
+					<?php foreach($newsPosts as $post){ setup_postdata($post); ?>
 					<div class="loop row">
-						<div class="pic col-md-4"><img src="img/post1.jpg" alt=""></div>
+						<div class="pic col-md-4"><?php echo get_the_post_thumbnail($post->ID, array(160,150), array('alt' => get_the_title($post->ID))); ?></div>
 						<div class="text col-md-8">
-							<span class="date">16.03.2017</span>
-							<h6>Компания «Болид»</h6>
-							<p>выпустила новую версию программного обеспечения АРМ "РЕСУРС", которая существенно повысила ее функциональные возможности.</p>
-							<a href="post.php" class="more">Подробнее »</a>
+							<span class="date"><?php echo get_the_date(); ?></span>
+							<h6><?php if (get_field('заголовок_для_главной', $post->ID)) {
+									echo get_field('заголовок_для_главной', $post->ID);
+								} else {
+									the_title(); 
+								} ?>
+							</h6>
+							<?php the_excerpt(); ?>
+							<a href="<?php the_permalink(); ?>" class="more">Подробнее »</a>
 						</div>
 					</div>
 					<hr>
-					<div class="loop row">
-						<div class="pic col-md-4"><img src="img/post2.jpg" alt=""></div>
-						<div class="text col-md-8">
-							<span class="date">16.03.2017</span>
-							<h6>Компания «Eaton»</h6>
-							<p>представляет выключатели-разъединители Dumeco DC для самых требовательных фотогальванических установок.</p>
-							<a href="post.php" class="more">Подробнее »</a>
-						</div>
-					</div>
-					<hr>
-					<div class="loop row">
-						<div class="pic col-md-4"><img src="img/post3.jpg" alt=""></div>
-						<div class="text col-md-8">
-							<span class="date">16.03.2017</span>
-							<h6>Компания «Cisco»</h6>
-							<p>представила инновационные коммутаторы нового поколения для центров обработки данных, позволяющие ускорить развертывание гибридных облаков.</p>							
-							<a href="post.php" class="more">Подробнее »</a>
-						</div>
-					</div>
-					<hr>
-					<div class="loop row">
-						<div class="pic col-md-4"><img src="img/post3.jpg" alt=""></div>
-						<div class="text col-md-8">
-							<span class="date">16.03.2017</span>
-							<h6>Компания «Cisco»</h6>
-							<p>представила инновационные коммутаторы нового поколения для центров обработки данных, позволяющие ускорить развертывание гибридных облаков.</p>							
-							<a href="post.php" class="more">Подробне »</a>
-						</div>
-					</div>
+					<?php } 
+					wp_reset_postdata();
+					?>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<a href="news.php" class="more">Все новости »</a>
+						<a href="<?php echo get_category_link(5); ?>" class="more">Все новости »</a>
 					</div>
 				</div>
 			</div>
@@ -161,17 +135,15 @@ $countSlide = 0;
 	</div>
 	<div class="partners">
 		<div class="container">
+			<?php if ($partners) { ?>
 			<div class="row">
-			<h2>Наши партнеры</h2>
-			<img src="img/partner1.png" alt="">
-			<img src="img/partner2.png" alt="">
-			<img src="img/partner3.png" alt="">
-			<img src="img/partner4.png" alt="">
-			<img src="img/partner5.png" alt="">
-			<img src="img/partner6.png" alt="">
-			<img src="img/partner7.png" alt="">
+				<h2>Наши партнеры</h2>
+				<?php foreach($partners as $img) { ?>
+				<img src="<?php echo $img['url'] ?>" alt="<?php echo $img['alt'] ?>">
+				<?php } ?>
+			</div>
+			<?php } ?>
 		</div>
-		</div>
-	</div>		 -->
+	</div>
 </main>
 <?php get_footer(); ?>
