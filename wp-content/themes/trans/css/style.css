@@ -301,11 +301,12 @@ header nav a:active,header nav .active{
 .contacts .fa-print{font-size: 27px;}
 .map{
 	height:370px;
-	background-size:cover;
+	/*background-size:cover;*/
 	margin: 15px 0;
-	background: url(../img/map.jpg) center no-repeat;
+	/*background: url(../img/map.jpg) center no-repeat;*/
 }
-.contact-form{
+.contact-form,
+.container .wpcf7 {
 	display: block;
 	max-width:470px;
 	margin:auto;
@@ -314,16 +315,26 @@ header nav a:active,header nav .active{
 form sup{
 	color: #f00;
 }
-.contact-form input,.contact-form textarea{
+.contact-form input,.contact-form textarea,
+.wpcf7-form-control-wrap input,
+.wpcf7-form-control-wrap textarea {
 	display:block;
 	width:100%;
 	margin-bottom: 7px;
 }
-.contact-form button{
+.contact-form textarea {
+	height: 116px;
+}
+.contact-form button,
+input[type="submit"] {
 	background-color:  #cac9c9;
 	border:none;
 	width:145px;
 	height: 35px;
+	margin-top: 10px;
+}
+.contact-form .wpcf7-response-output {
+	margin: 0;
 }
 /*СТРАНИЦА ОТЗЫВЫ*/
 .review>*{

@@ -197,10 +197,13 @@ function enqueue_styles() {
 add_action('wp_enqueue_scripts', 'enqueue_styles');
 
 function enqueue_scripts () {
-
+/*  wp_register_script('googlemaps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB2H1oOiWlRC1dOiVYNBVVpYtdWicb_Z9c',null,null,true);  
+  wp_enqueue_script('googlemaps');*/
 }
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
-
+add_filter('acf/settings/google_api_key', function () {
+    return 'AIzaSyB2H1oOiWlRC1dOiVYNBVVpYtdWicb_Z9c';
+});
 /* Menu */
 if (function_exists('add_theme_support')) {
     add_theme_support('menus');
