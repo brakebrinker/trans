@@ -4,6 +4,7 @@
 
 $args = array(
     'posts_per_page' => 0,
+    'numberposts' => -1,
     'cat'            => 7,
     'order'          => 'ASC',
 );

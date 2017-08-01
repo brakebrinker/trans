@@ -62,6 +62,9 @@ input:invalid:not(:placeholder-shown){
 	border:2px solid #fff;
 	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.26);
 }
+.product .ramka {
+	overflow: hidden;
+}
 .text p{
 	margin-bottom: 1.2em;
 	line-height: 1.2;
@@ -280,8 +283,10 @@ header nav a:active,header nav .active{
 	color:#f3812b;
 }
 .product img{
-	width:100%;
-	height:230px;
+/*	width:100%;
+	height:230px;*/
+	width:auto;
+	height: 230px;
 }
 .product span{
 	display:block;

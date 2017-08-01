@@ -41,7 +41,7 @@ $newsPosts = get_posts($args);
 			<div class="col-md-4 col-sm-6 actual">
 				<div class="pic ramka"><?php echo get_the_post_thumbnail($post->ID, array(360,230), array('alt' => get_the_title($post->ID))); ?>
 				</div>
-				<h4><?php the_title(); ?></h4>
+				<h4><?php echo get_field('заголовок_для_главной', $post->ID); ?></h4>
 				<?php the_excerpt(); ?>
 				<a href="<?php the_permalink(); ?>" class="details">Подробнее &#187;</a>
 			</div>
