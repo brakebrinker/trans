@@ -104,14 +104,17 @@ header nav a:active,header nav .active{
 	background-color: rgba(244, 123, 32, 0.94);
 }
 /*ВЫПАДАЮЩЕЕ МЕНЮ БЕЗ БУТСТРАПА*/
-.dd{
+.dd,
+nav #menu-glavnoe-menyu li {
 	position: relative;
 	display: inline-block;
 }
-.dd:hover .dd-menu{
+.dd:hover .dd-menu,
+nav #menu-glavnoe-menyu li:hover .sub-menu {
 	display: block;
 }
-.dd-menu{
+.dd-menu,
+.sub-menu {
 	display: none;
 	position: absolute;
 	top:100%;
@@ -123,11 +126,13 @@ header nav a:active,header nav .active{
 	z-index:9999;
 	white-space: nowrap;
 }
-.dd-menu a{
+.dd-menu a,
+.sub-menu a {
 	display: block;
 	padding: 8px 14px;
 }
-.dd-menu a:hover{
+.dd-menu a:hover,
+.sub-menu a:hover{
 	background-color: rgba(255, 201, 161, 0.32);
 }
 /*СЛАЙДЕР*/
@@ -482,10 +487,14 @@ td:last-child{
 	color: #494949;
 	margin-bottom: 30px;
 }
+.cert-loop .ramka {
+	width: 130px;
+	margin: 0 auto 30px;
+}
 .cert img{
 	height: 180px;
 	width: auto;
-	margin-bottom: 30px;
+	/*margin-bottom: 30px;*/
 }
 .cert span{
 	display: block;
