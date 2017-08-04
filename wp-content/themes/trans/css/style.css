@@ -56,6 +56,8 @@ input:invalid:not(:placeholder-shown){
 	min-height:100%;*/
 	width: auto;
 	height: 100%;
+	margin: 0 auto;
+	display: block;
 	/*min-height: 100%;*/
 }
 .ramka{
@@ -322,6 +324,10 @@ nav #menu-glavnoe-menyu li:hover .sub-menu {
 	margin:auto;
 	margin-top: 20px;
 }
+.form-container .wpcf7 {
+    width: 100%;
+    max-width: none;
+}
 form sup{
 	color: #f00;
 }
@@ -346,6 +352,149 @@ input[type="submit"] {
 .contact-form .wpcf7-response-output {
 	margin: 0;
 }
+
+/* Опросный лист */
+form.ask-list br {
+    display: none;
+}
+form.ask-list .row {
+    margin-bottom: 25px;
+}
+form.ask-list label {
+    color: #474032;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    min-width: 80%;
+}
+form.ask-list .in-line label,
+form.ask-list .in-line-sm label {
+    min-width: auto;
+}
+form.ask-list .in-line-sm label {
+	min-width: auto;
+	max-width: 63%;
+	vertical-align: baseline;
+	display: inline-block;
+}
+form.ask-list .in-line span.wpcf7-form-control-wrap {
+    width: 50%;
+    display: inline-block;
+}
+form.ask-list .in-line-sm span.wpcf7-form-control-wrap {
+	width: 18%;
+	display: inline-block;
+	vertical-align: middle;
+}
+form.ask-list input[type="text"], form.ask-list input[type="email"], form.ask-list input[type="tel"] {
+	height: 34px;
+	margin-bottom: 0;
+	height: 34px;
+	margin-bottom: 0;
+	padding-left: 10px;
+	color: #474032;
+	font-size: 14px;
+	font-weight: 400;
+}
+form.ask-list select {
+    border: 1px solid #f47b20;
+    background-color: #efe6de;
+    height: 34px;
+    width: 100%;
+    font-size: 14px;
+}
+form.ask-list .group-input input[type="text"],
+form.ask-list .group-input-four input[type="text"] {
+	padding: 0;
+	text-align: center;
+}
+form.ask-list .points-title {
+    color: #474032;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 22px;
+}
+form.ask-list .points-subtitle {
+    color: #474032;
+    font-size: 15px;
+    font-weight: 500;
+}
+/*form.ask-list span.wpcf7-list-item.first {
+	clear: both;
+	display: block;
+}*/
+form.ask-list span.wpcf7-list-item {
+	margin: 0;
+}
+form.ask-list span.wpcf7-form-control-wrap {
+    margin-bottom: 13px;
+    display: block;
+    position: relative;
+}
+form.ask-list .group-input span.wpcf7-form-control-wrap {
+	width: 20%;
+	display: inline-block;
+}
+form.ask-list .group-input-four span.wpcf7-form-control-wrap {
+	width: 15%;
+	display: inline-block;
+}
+form.ask-list .group-input-check span.wpcf7-form-control-wrap {
+	width: 40%;
+	display: inline-block;
+}
+form.ask-list .group-input-check input[type="text"] {
+	width: 40%;
+	padding: 0;
+	text-align: center;
+}
+form.ask-list textarea.wpcf7-form-control {
+    height: 95px;
+}
+form.ask-list button, input[type="submit"] {
+    float: right;
+    width: auto;
+}
+span.wpcf7-not-valid-tip {
+    position: absolute;
+    text-transform: lowercase;
+    bottom: 10px;
+    left: 40px;
+    font-size: 14px;
+    border: 1px solid #f47b20;
+    padding: 0 7px;
+}
+form.ask-list span.sign {
+    margin: 5px;
+    color:  #474032;
+    font-size: 14px;
+    font-weight: 400;
+}
+form.ask-list span.wpcf7-list-item-label {
+	margin-right: 18px;
+	cursor: pointer;
+}
+form.ask-list span.wpcf7-list-item-label:before {
+	content: "";
+	width: 14px;
+	height: 14px;
+	display: inline-block;
+	font-size: 17px;
+	line-height: 0.9;
+	background-color: #efe6de;
+	border: 1px solid #f47b20;
+	margin-right: 10px;
+}
+form.ask-list input[type="checkbox"]:not(:checked),
+form.ask-list input[type="checkbox"]:checked {
+    opacity: 0;
+	display: none;
+}
+form.ask-list input[type="checkbox"]:checked + span.wpcf7-list-item-label:before{
+    content: "✓";
+}
+
 /*СТРАНИЦА ОТЗЫВЫ*/
 .review>*{
 	margin-bottom: 10px;
