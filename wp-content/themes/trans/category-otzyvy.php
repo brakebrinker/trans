@@ -51,6 +51,7 @@ require_once ABSPATH . 'wp-content/themes/trans/recaptchalib.php';
 			<div>
 				<button id="send" name="send" type="submit">Отправить</button>
 			</div>
+			<input type="hidden" class="send-email" name="send_email" value="<?php echo get_option('admin_email'); ?>">
 		</form>
 	</div>
 	<hr>

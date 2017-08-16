@@ -20,7 +20,13 @@ $productPosts = get_posts($args); ?>
         <div class="row">
         <?php foreach($productPosts as $post) { setup_postdata($post); ?>
             <div class="col-md-3 col-sm-4">
-                <a href="<?php the_permalink(); ?>" class="product">
+                
+                <a href="<?php 
+                if ($post->ID != 112) {
+                    the_permalink();
+                } else {
+                    echo get_category_link(8);
+                } ?>" class="product">
                     <div class="ramka">
                         <?php echo get_the_post_thumbnail($post->ID, array(263,230), array('alt' => get_the_title($post->ID))); ?>
                     </div>

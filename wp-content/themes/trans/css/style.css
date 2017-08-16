@@ -51,14 +51,12 @@ input:invalid:not(:placeholder-shown){
 	overflow:hidden;
 }
 .pic img{
-/*	width:100%;
-	height:auto;
-	min-height:100%;*/
+	max-width:100%;
 	width: auto;
 	height: 100%;
 	margin: 0 auto;
 	display: block;
-	/*min-height: 100%;*/
+
 }
 .ramka{
 	border:2px solid #fff;
@@ -75,8 +73,14 @@ input:invalid:not(:placeholder-shown){
 .logo{
 	display:block;
 	height:55px;
-	background: url(../img/Logo.svg) no-repeat center left;
-	background-size:100% auto;
+	/*background: url(../img/Logo.svg) no-repeat center left;
+	background-size:100% auto;*/
+	text-align:center;
+}
+.logo img{
+	height:100%;
+	width:auto;
+	max-width:100%;
 }
 .breadcrumbs{
 	font-size: 14px;
@@ -87,7 +91,9 @@ input:invalid:not(:placeholder-shown){
 	color:rgba(244, 123, 32, 0.94);
 	text-decoration: underline;
 }
-
+header{
+	padding-top: 10px;
+}
 header nav ul {
 	margin: 0;
 	padding: 0;
@@ -101,7 +107,7 @@ header nav a{
 	text-transform: uppercase;
 	padding:15px;
 }
-header nav a:active,header nav .active{
+header nav li:hover>a,header nav .active{
 	color:#fff;
 	background-color: rgba(244, 123, 32, 0.94);
 }
@@ -114,6 +120,9 @@ nav #menu-glavnoe-menyu li {
 .dd:hover .dd-menu,
 nav #menu-glavnoe-menyu li:hover .sub-menu {
 	display: block;
+}
+#menu-glavnoe-menyu ul.sub-menu > li {
+    display: block;
 }
 .dd-menu,
 .sub-menu {
@@ -312,7 +321,7 @@ nav #menu-glavnoe-menyu li:hover .sub-menu {
 .contacts .fa-envelope{font-size: 19px;}
 .contacts .fa-print{font-size: 27px;}
 .map{
-	height:370px;
+	/*height:370px;*/
 	/*background-size:cover;*/
 	margin: 15px 0;
 	/*background: url(../img/map.jpg) center no-repeat;*/
@@ -459,10 +468,11 @@ form.ask-list button, input[type="submit"] {
 span.wpcf7-not-valid-tip {
     position: absolute;
     text-transform: lowercase;
-    bottom: 10px;
+    bottom: 20px;
     left: 40px;
     font-size: 14px;
     border: 1px solid #f47b20;
+    background-color: #efe6de;
     padding: 0 7px;
 }
 form.ask-list span.sign {
@@ -753,7 +763,7 @@ footer [class^="fa"]:not(.share){
 		height:auto;
 	}
 	.actual .pic{
-		display:inline;
+		display:inline-block;
 	}
 	.actual img{
 		width:auto;
@@ -774,6 +784,7 @@ footer [class^="fa"]:not(.share){
 	}
 	.support .pic{
 		height: auto;
+		display: inline-block;
 	}
 	.product img,.post-loop img{
 		width:auto;
@@ -796,3 +807,11 @@ footer [class^="fa"]:not(.share){
 	}
 	.object .pic{margin: 20px 0;}
 }
+.alignleft{
+    float: left;
+    margin-right: 20px;
+    }
+.alignright{
+    float: right;
+    margin-left: 20px;
+    }

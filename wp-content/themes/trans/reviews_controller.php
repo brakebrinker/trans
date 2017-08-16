@@ -16,8 +16,13 @@ $secret = "6Lc4OysUAAAAAHBpMBV1V98hXsZOaUWJIiLcXlGN";
 $response = null;
 //проверка секретного ключа
 $reCaptcha = new ReCaptcha($secret);
+$c = true;
 
 if(isset($_POST['send']) == '1') {
+    $project_name = "Трансинженеринг";
+    $admin_email  = $_POST['send_email'];
+    $form_subject = "Новый отзыв на сайте Трансинженеринг";
+
     if ($_POST["g-recaptcha-response"]) {
         $response = $reCaptcha->verifyResponse(
             $_SERVER["REMOTE_ADDR"],
@@ -58,6 +63,36 @@ if(isset($_POST['send']) == '1') {
 
         // wp_redirect(site_url() . '/otzyvy');
         wp_safe_redirect(site_url() . '/spasibo-za-vash-otzyv');
+
+        foreach ( $_POST as $key => $value ) {
+            if ( $value != "" && $key != "project_name" && $key != "admin_email" && $key != "form_subject" ) {
+                $message .= "
+                " . ( ($c = !$c) ? '<tr>':'<tr style="background-color: #f8f8f8;">' ) . "
+                <td style='padding: 10px; border: #e9e9e9 1px solid;'><b>$key</b></td>
+                <td style='padding: 10px; border: #e9e9e9 1px solid;'>$value</td>
+            </tr>
+            ";
+            }
+        }
+
+        $message = "<table style='width: 100%;'>$message</table>";
+
+        function adopt($text) {
+            return '=?UTF-8?B?'.base64_encode($text).'?=';
+        }
+
+        $headers = "MIME-Version: 1.0" . PHP_EOL .
+        "Content-Type: text/html; charset=utf-8" . PHP_EOL .
+        'From: '.adopt($project_name).' <'.$admin_email.'>' . PHP_EOL .
+        'Reply-To: '.$admin_email.'' . PHP_EOL;
+
+        mail($admin_email, adopt($form_subject), $message, $headers );
+
+/*        if (mail($admin_email, adopt($form_subject), $message, $headers )) { 
+            echo "send"; 
+        } else { 
+            echo "error"; 
+        } */
         exit;
     } else {
         echo "Вы не прошли защиту от спама";

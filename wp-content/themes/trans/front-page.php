@@ -41,7 +41,7 @@ $newsPosts = get_posts($args);
 		<div class="row">
 			<?php foreach($productPosts as $post) { setup_postdata($post); ?>
 			<div class="col-md-4 col-sm-6 actual">
-				<div class="pic ramka"><?php echo get_the_post_thumbnail($post->ID, array(360,230), array('alt' => get_the_title($post->ID))); ?>
+				<div class="pic ramka"><a href="<?php the_permalink(); ?>"><?php echo get_the_post_thumbnail($post->ID, array(360,230), array('alt' => get_the_title($post->ID))); ?></a>
 				</div>
 				<h4><?php echo get_field('заголовок_для_главной', $post->ID); ?></h4>
 				<?php the_excerpt(); ?>
@@ -61,15 +61,22 @@ $newsPosts = get_posts($args);
 				<div class="row container-fluid info-block">
 					<?php foreach($importantPosts as $post) { setup_postdata($post); ?>
 					<div class="loop row">
-						<div class="pic col-md-4"><?php echo get_the_post_thumbnail($post->ID, array(160,150), array('alt' => get_the_title($post->ID))); ?></div>
+						<?php 
+							$catitem = get_field('выбор_ссылки_на_категорию', $post->ID); 
+							$postitem = get_field('выбор_ссылки_на_запись', $post->ID); 
+						?>
+						<div class="pic col-md-4"><a href="
+							<?php 
+								if ($catitem) {
+									echo get_category_link( $catitem ); 
+								} elseif ($postitem) {
+									echo $postitem; 
+								}
+							?>"><?php echo get_the_post_thumbnail($post->ID, array(160,150), array('alt' => get_the_title($post->ID))); ?></a></div>
 						<div class="text col-md-8">
 							<h6><?php the_title(); ?></h6>
 							<?php the_excerpt(); ?>
 							<span class="date"><?php echo get_the_date(); ?></span>
-							<?php 
-								$catitem = get_field('выбор_ссылки_на_категорию', $post->ID); 
-								$postitem = get_field('выбор_ссылки_на_запись', $post->ID); 
-							?>
 							<a href="
 							<?php 
 								if ($catitem) {
@@ -93,7 +100,7 @@ $newsPosts = get_posts($args);
 				<div class="row container-fluid info-block">
 					<?php foreach($newsPosts as $post){ setup_postdata($post); ?>
 					<div class="loop row">
-						<div class="pic col-md-4"><?php echo get_the_post_thumbnail($post->ID, array(160,150), array('alt' => get_the_title($post->ID))); ?></div>
+						<div class="pic col-md-4"><a href="<?php the_permalink(); ?>"><?php echo get_the_post_thumbnail($post->ID, array(160,150), array('alt' => get_the_title($post->ID))); ?></a></div>
 						<div class="text col-md-8">
 							<span class="date"><?php echo get_the_date(); ?></span>
 							<h6><?php if (get_field('заголовок_для_главной', $post->ID)) {

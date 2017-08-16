@@ -3,6 +3,7 @@
 <?php if (have_posts()):
 	while (have_posts()): the_post(); ?>
 	<?php $thisCat = get_the_category(get_queried_object_id()); ?>
+	<pre><?php print_r($thisCat); ?></pre>
 	<main>
 		<div class="container">
 			<div class="breadcrumbs">
@@ -11,12 +12,15 @@
 			</div>
 			<?php if ($thisCat[0]->category_parent == 5) { ?>
 				<h3>Новость</h3>
+				<?php if (get_the_post_thumbnail_url(get_queried_object_id(), 'full')) {?>
 				<div class="post-image ramka" style="background-image: url(
 				<?php echo get_the_post_thumbnail_url(get_queried_object_id(), 'full'); ?>)"></div>
+				<?php } ?>
 				<h6><?php the_title(); ?></h6>
 				<p class="date"><?php echo get_the_date(); ?></p>
 				<?php the_content(); ?>
 			<?php } else if ($thisCat[0]->category_parent == 9) { ?>
+			<?php echo $thisCat[0]->category_parent; ?>
 				<?php 
 				  $keyName = 'option:';
 				  $options = array();
@@ -33,8 +37,10 @@
 				<h3><?php the_title(); ?></h3>
 				<div class="row good">
 					<div class="col-md-4 col-sm-4">
+						<?php if (get_the_post_thumbnail_url(get_queried_object_id(), 'full')) {?>
 						<div class="good-image ramka" style="background-image: url(
 						<?php echo get_the_post_thumbnail_url(get_queried_object_id(), 'medium'); ?>)"></div>
+						<?php } ?>
 					</div>
 					<div class="col-md-8 col-sm-8">
 						<?php echo get_field('верхнее_описание', get_queried_object_id()); ?>
@@ -62,8 +68,10 @@
 				</div>
 			<?php } else {?>
 			<h3><?php the_title(); ?></h3>
+				<?php if (get_the_post_thumbnail_url(get_queried_object_id(), 'full')) {?>
 				<div class="post-image ramka" style="background-image: url(
 				<?php echo get_the_post_thumbnail_url(get_queried_object_id(), 'full'); ?>)"></div>
+				<?php } ?>
 				<?php the_content(); ?>
 				<?php } ?>
 		</div>
