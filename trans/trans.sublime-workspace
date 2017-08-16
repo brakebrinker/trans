@@ -1,0 +1,1420 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"prin",
+				"print_r"
+			],
+			[
+				"the",
+				"the_content\t(page-o-kompanii.php)"
+			],
+			[
+				"text",
+				"textarea\t(index.php)"
+			],
+			[
+				"tr",
+				"transparent"
+			],
+			[
+				"main",
+				"mainlevel\t(style.css)"
+			],
+			[
+				"m",
+				"margin"
+			],
+			[
+				"list",
+				"list-style"
+			],
+			[
+				"mw",
+				"max-width"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"in",
+				"inherit\t(styles.css)"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"d",
+				"display"
+			],
+			[
+				"ite",
+				"item"
+			],
+			[
+				"sli",
+				"slideWindowWidth"
+			],
+			[
+				"w",
+				"width\t(adaptive.css)"
+			],
+			[
+				"item",
+				"itemSize"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"a",
+				"auto"
+			],
+			[
+				"pa",
+				"padding-left"
+			],
+			[
+				"fl",
+				"float"
+			],
+			[
+				"bor",
+				"border-box"
+			],
+			[
+				"g",
+				"gm-site"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/wp-content/themes/trans/page-o-kompanii.php",
+			"settings":
+			{
+				"buffer_size": 1431,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/wp-content/themes/trans/page.php",
+			"settings":
+			{
+				"buffer_size": 731,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/wp-content/themes/trans/single.php",
+			"settings":
+			{
+				"buffer_size": 2877,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<?php\n/*\n*WP Post template_url:  Шаблон страницы тренинга страт сессия\n*/\n\n$partPosts = get_field('слайдер_логотипов', get_queried_object_id());\n\n$targetName = 'цель и результат:';\n$arrTargets = array();\n\n$meta_targets = get_post_meta(get_queried_object_id());\n\nforeach ($meta_targets as $sr_name => $sr_content ) {\n    if (strpos($sr_name, $targetName) !== FALSE) {\n        $repl_name = trim(ereg_replace ( $targetName, '', $sr_name));\n        $arrTargets[$repl_name] = $sr_content;\n    }\n}\n?>\n<?php get_header(); ?>\n<div class=\"section s-training-program\">\n    <div class=\"container\">\n        <h1><?php the_title(); ?></h1>\n        <?php echo the_content(); ?>\n    </div>\n</div>\n<div class=\"section s-trainer-numbers\" style=\"margin-top: 50px\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-md-8 col-md-push-4 col-sm-7 col-sm-push-5\">\n                <div class=\"trainer-quote\">“<?php echo get_field('девиз', 305); ?>”</div>\n                <div class=\"trainer-descr\">\n                    <?php echo get_field('автор', 305); ?>\n                </div>\n                <div class=\"trainer-numbers\">\n                    <div class=\"trainer-number-wrap\">\n                        <?php echo get_field('цифрографика_1', 305); ?>\n                    </div>\n                    <div class=\"trainer-number-wrap\">\n                        <?php echo get_field('цифрографика_2', 305); ?>\n                    </div>\n                    <div class=\"trainer-number-wrap\">\n                        <?php echo get_field('цифрографика_3', 305); ?>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-md-4 col-md-pull-8 col-sm-4 col-sm-pull-7 trainer-img-col\">\n            </div>\n        </div>\n        <div class=\"speaker-img\"><img src=\"<?php bloginfo('template_url'); ?>/img/speaker-at-left.png\" alt=\"\"></div>\n    </div>\n</div>\n<div class=\"section s-trust-me-companies\">\n    <div class=\"container\">\n        <div class=\"h2 small-title\">\n            <?php echo get_field('компании_в_которых_был_проведен_тренинг', get_queried_object_id()); ?><br>\n            \"<?php the_title(); ?>\"\n        </div>\n    </div>\n    <div class=\"container\">\n        <?php if (!empty($partPosts)) { ?>\n            <div class=\"customers-carousel owl-carousel\">\n                <?php foreach($partPosts as $post){ setup_postdata($post); ?>\n                    <?php\n                    $img = get_field('изображение', $post->ID);\n                    $link = get_field('ссылка', $post->ID);\n\n                    ?>\n                    <div class=\"customer-logo\">\n                        <?php if ($link) { ?>\n                            <a href=\"<?php echo $link; ?>\"><img src=\"<?php echo $img['url']; ?>\" alt=\"\"></a>\n                        <?php } else { ?>\n                            <img src=\"<?php echo $img['url']; ?>\" alt=\"\">\n                        <?php } ?>\n                    </div>\n                <?php }\n                wp_reset_postdata();\n                ?>\n            </div>\n        <?php } else {  get_template_part( 'slider-kompany' ); } ?>\n    </div>\n</div>\n<?php get_template_part( 'program-form' ); ?>\n<?php get_template_part( 'also-recomendet' ); ?>\n<div class=\"section s-program-article\">\n    <div class=\"container\">\n        <div class=\"h2 small-title\"><a name=\"more\">\n                <?php echo get_field('подробная_программа_цикла_тренингов', get_queried_object_id()); ?> <br>\n                <?php echo get_the_title(get_queried_object_id()); ?></a>\n        </div>\n        <?php echo get_field('программа_цикла_тренингов', get_queried_object_id()); ?>\n    </div>\n</div>\n<?php get_template_part( 'have-questions-form-2' ); ?>\n<?php get_footer(); ?>\n\n",
+			"file": "/media/job/projects/u4g_origin/tpl_trening-with-strat.php",
+			"file_size": 3931,
+			"file_write_time": 131442392998310546,
+			"settings":
+			{
+				"buffer_size": 3716,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/wp-content/themes/trans/category-novosti.php",
+			"settings":
+			{
+				"buffer_size": 1069,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "layout/contacts.php",
+			"settings":
+			{
+				"buffer_size": 2657,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/wp-content/themes/trans/page-kontakty.php",
+			"settings":
+			{
+				"buffer_size": 3347,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/wp-content/themes/trans/header.php",
+			"settings":
+			{
+				"buffer_size": 1251,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 354.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"ANF: New File"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"sftp",
+				"SFTP: Setup Server…"
+			],
+			[
+				"anf",
+				"ANF: New File"
+			]
+		],
+		"width": 531.0
+	},
+	"console":
+	{
+		"height": 180.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/media/job/projects/trans",
+		"/media/job/projects/trans/app",
+		"/media/job/projects/trans/app/wp-content",
+		"/media/job/projects/trans/app/wp-content/themes",
+		"/media/job/projects/trans/app/wp-content/themes/trans"
+	],
+	"file_history":
+	[
+		"/media/job/projects/trans/app/wp-content/themes/trans/css/style.css",
+		"/media/iframe/C4142DAF142DA580/projects/trans/layout/products.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/wp-content/themes/trans/css/style.css",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/wp-content/themes/trans/front-page.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/wp-content/themes/trans/functions.php",
+		"/media/iframe/C4142DAF142DA580/projects/fsconsult/wp/fsconsult/wp-content/themes/fsconsult/front-page.php",
+		"/media/iframe/C4142DAF142DA580/projects/first_project/app/category-blog.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/layout/post.php",
+		"/media/iframe/C4142DAF142DA580/projects/first_project/app/single.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/wp-content/themes/trans/single.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/layout/about.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/wp-content/themes/trans/js/1.js",
+		"/media/iframe/C4142DAF142DA580/projects/trans/layout/news.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/wp-content/themes/trans/pagination.php",
+		"/media/iframe/C4142DAF142DA580/projects/first_project/app/pagination.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/layout/index.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/wp-content/themes/trans/footer.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/wp-content/themes/trans/header.php",
+		"/media/iframe/C4142DAF142DA580/projects/u4g_origin/front-page.php",
+		"/media/iframe/C4142DAF142DA580/projects/u4g_origin/page-rezultaty.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/layout/footer.php",
+		"/media/iframe/C4142DAF142DA580/projects/fsconsult/wp/fsconsult/wp-content/themes/fsconsult/header.php",
+		"/media/iframe/C4142DAF142DA580/projects/u4g_origin/header.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/sftp-config.json",
+		"/media/iframe/C4142DAF142DA580/projects/trans/layout/header.php",
+		"/media/iframe/C4142DAF142DA580/projects/u4g_origin/page.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/app/wp-content/themes/trans/page.php",
+		"/media/iframe/C4142DAF142DA580/projects/u4g_origin/functions.php",
+		"/media/iframe/C4142DAF142DA580/projects/trans/.gitignore",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/index.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/konopatka-fixed/price.html",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/templateDetails.xml",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/js/1.js",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/css/style.css",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/konopatka-fixed/index.html",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/html/com_content/section/blog.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/html/com_content/category/default.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/html/com_content/section/default.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/html/com_content/section/blog_item.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/modules/mod_junewsultra/tmpl/videotpl.php",
+		"/media/iframe/C4142DAF142DA580/projects/u4g_origin/sftp-config.json",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/html/modules.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/modules/mod_mainmenu/legacy.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/js/jquery.meanmenu.js",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/konopatka-fixed/contacts.html",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/konopatka-fixed/post.html",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/modules/mod_breadcrumbs/tmpl/default.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/templates/konopatka/html/com_content/frontpage/default.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/modules/mod_junewsultra/helper.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/modules/mod_junewsultra/mod_junewsultra.php",
+		"/tmp/sublime-sftp-browse-1501140558/mapped/www/dhl.2metr.ru/modules/mod_junewsultra/tmpl/default.php",
+		"/tmp/sublime-sftp-browse-1501137836/mapped/www/dhl.2metr.ru/libraries/joomla/filesystem/folder.php",
+		"/tmp/sublime-sftp-browse-1501138082/mapped/www/dhl.2metr.ru/configuration.php",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/sftp-config.json",
+		"/media/iframe/C4142DAF142DA580/projects/konopatka/app/.gitignore",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/.htaccess",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/manager/config.core.php",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/assets/elements/templates/galleryItem.tpl",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/assets/elements/templates/product.tpl",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/assets/elements/chunks/scripts.tpl",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/deco-r.su/catalog.php",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/assets/elements/chunks/meta.tpl",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/assets/elements/chunks/header.tpl",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/assets/css/styles.css",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/assets/images",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/deco-r.su/inc/footer.php",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/.gitignore",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/index.html",
+		"/media/iframe/C4142DAF142DA580/projects/dekor/sftp-config.json",
+		"/media/iframe/C4142DAF142DA580/projects/karkas/.gitignore",
+		"/media/iframe/C4142DAF142DA580/projects/diplomivuzov/css/styles.css",
+		"/media/iframe/C4142DAF142DA580/projects/diplomivuzov/sftp-config.json",
+		"/media/iframe/C4142DAF142DA580/projects/diplomivuzov/css/adaptive.css",
+		"/media/iframe/C4142DAF142DA580/projects/karkas/app/sftp-config.json",
+		"/media/iframe/C4142DAF142DA580/projects/first_project/package.json",
+		"/media/iframe/C4142DAF142DA580/projects/first_project/gulpfile.js",
+		"/media/iframe/C4142DAF142DA580/projects/karkas/package.json",
+		"/media/iframe/C4142DAF142DA580/projects/karkas/sftp-config.json",
+		"/media/iframe/C4142DAF142DA580/projects/diplomivuzov/css/demo.css",
+		"/media/iframe/C4142DAF142DA580/projects/gm/bitrix/templates/mnemaloru/header.php",
+		"/media/iframe/C4142DAF142DA580/projects/gm/bitrix/templates/mnemaloru/components/bb/review.add/.default/style.css",
+		"/home/iframe/.config/sublime-text-3/Packages/HTML-CSS-JS Prettify/HTMLPrettify.sublime-settings",
+		"/media/iframe/C4142DAF142DA580/projects/gm/sftp-config.json",
+		"/home/iframe/.config/sublime-text-3/Packages/User/SFTP.errors.log"
+	],
+	"find":
+	{
+		"height": 31.0
+	},
+	"find_in_files":
+	{
+		"height": 139.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			".contact-form input,",
+			".contact-form input, .contact-form textarea",
+			"_1",
+			"blogPosts",
+			"descPosts",
+			"foreach",
+			"servPosts"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/wp-content/themes/trans/page-o-kompanii.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1431,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								868,
+								868
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/wp-content/themes/trans/page.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 731,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								424,
+								424
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										611,
+										612
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										421,
+										422
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/wp-content/themes/trans/single.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2877,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								349,
+								349
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										349,
+										350
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/square_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										347,
+										348
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/media/job/projects/u4g_origin/tpl_trening-with-strat.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3716,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								70,
+								70
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/wp-content/themes/trans/category-novosti.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1069,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								230,
+								230
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "layout/contacts.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2657,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								167,
+								167
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										163,
+										166
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/tag.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										70,
+										73
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 576.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/wp-content/themes/trans/page-kontakty.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3347,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2705,
+								2705
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										2731,
+										2732
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										2695,
+										2696
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"incomplete_sync": null,
+							"open_with_edit": true,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 576.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/wp-content/themes/trans/header.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1251,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										14,
+										15
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/angle_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										0,
+										1
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 48.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 33.0
+	},
+	"pinned_build_system": "",
+	"project": "trans.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"style",
+				"app/css/style.min.css"
+			],
+			[
+				".gi",
+				".gitignore"
+			],
+			[
+				"he",
+				"bitrix/templates/mnemaloru/header.php"
+			],
+			[
+				"s",
+				"bitrix/templates/mnemaloru/css/styles.css"
+			],
+			[
+				"head",
+				"bitrix/templates/mnemaloru/header.php"
+			],
+			[
+				"adap",
+				"bitrix/templates/mnemaloru/css/adaptive.css"
+			],
+			[
+				"sty",
+				"bitrix/templates/mnemaloru/components/bb/review.add/.default/style.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 264.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
